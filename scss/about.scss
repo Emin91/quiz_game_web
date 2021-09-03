@@ -1,0 +1,206 @@
+@import "_fonts";
+$c0:#ffffff;
+$c1:#DC5866;
+$c2:#000000;
+@import "_mixin";
+@import "_nullstyle";
+@import "_header";
+
+.wrapper {
+	min-height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	   -moz-box-orient: vertical;
+	   -moz-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	background-image: url("../img/pattern.png");
+	background-repeat: repeat-x;
+	background-position: 50% 100%;
+}
+
+.main {
+    background-color: $c0;
+    flex: 1 1 auto;
+    display: flex;
+    border: 8px solid #E5828C;
+    border-radius: 48px;
+    height: 75vh;
+    margin: 100px 20px 10px;
+    align-items: center;
+    overflow: hidden;
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        justify-content: center;
+        padding: 3% 0 3% 5%;
+        animation: scale 2s 1;
+    }
+
+    &__image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3%;
+        width: 60%;
+        height: 100%;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    p {
+        font-size: 30px;
+        font-weight: 500;
+
+        span {
+            $animationSteps: 50;
+            $animationElementsCount: 500;
+            $delayBetweenLetters: 0.2;
+            animation-name: text-flow;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-fill-mode: forwards;
+
+            @keyframes text-flow {
+                @for $i from 0 through $animationSteps {
+                    #{percentage($i * (1 / $animationSteps))} {
+                        color: hsl(random(360), 50, 50);
+                    }
+                }
+            }
+
+            $totalDelayTime: $animationElementsCount * $delayBetweenLetters;
+
+            @for $i from 1 through $animationElementsCount {
+                #{span}:nth-of-type(#{$i}) {
+                    animation-delay: #{($i * $delayBetweenLetters) - $totalDelayTime}s;
+                }
+            }
+        }
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        animation: scale 2s 1;
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+
+    100% {
+        transform: scale(1.0, 1.0);
+    }
+}
+
+@media screen and (max-width: 1290px) {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1132px) {
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .main h1 {
+        font-size: 40px;
+    }
+
+    .main p {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 1015px) {
+    .main {
+        flex-direction: column-reverse;
+        height: auto;
+
+        div {
+            width: 100%;
+        }
+
+        &__text {
+            padding: 7%;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 705px) {
+    .main {
+        border-width: 6px;
+        border-radius: 40px;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 495px) {
+    .main {
+        justify-content: space-around;
+
+
+        h1 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .main {
+        justify-content: center;
+
+        &__image {
+            padding-top: 0;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+    }
+}
+
+@import "_footer";
+@import "_media";
